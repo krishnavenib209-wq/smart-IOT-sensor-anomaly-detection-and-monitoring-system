@@ -1,0 +1,25 @@
+ML-READY DATASET BUILD REPORT
+============================================================
+
+Input dataset: C:\IoT-Collector\analysis\setD_D2\datasets\merged_dataset_timestamp_repaired_v2.csv
+Output dataset: C:\IoT-Collector\analysis\setD_D2\datasets\merged_dataset_ml_ready.csv (now moved to C:\IoT-Collector\ Data ,named(dataset_curated))
+
+Initial rows: 7,062,168
+Rows after duplicate removal: 7,005,585
+Duplicate rows removed: 56,583
+Final rows saved: 7,005,585
+
+Timestamp status:
+  Valid timestamps: 1,137,481
+  Invalid timestamps remaining: 5,868,104
+
+Label normalization summary:
+  Multi-label anomaly rows retained: 61
+  Corrupted anomaly_type rows mapped to 'corrupted': 841
+  Corrupted anomaly_source rows mapped to 'corrupted': 0
+
+Per-device summary:
+  pi4: rows=1,779,729, anomalies=7,846, rate=0.4409%
+  pi5: rows=1,626,894, anomalies=15,274, rate=0.9388%
+  pi6: rows=1,776,257, anomalies=7,977, rate=0.4491%
+  pi7: rows=1,822,705, anomalies=11,551, rate=0.6337%

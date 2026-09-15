@@ -1,0 +1,35 @@
+SMART SAMPLING SUBSET DESCRIPTION
+============================================================
+
+Purpose:
+This directory contains sampled subsets derived from the full curated dataset to support reproducible experimental evaluation under computational constraints. The sampling process was designed to preserve key characteristics of the original dataset, including device-level heterogeneity, anomaly sparsity, and temporal coverage.
+
+Dataset Origin:
+The subsets were generated from the final curated dataset consisting of 7,005,585 records.
+
+Sampling Strategy:
+A centralized subset of 1,000,000 records was created to represent the full dataset while maintaining:
+- Proportional representation of each device (Pi-4 to Pi-7)
+- Original anomaly distribution
+- Temporal consistency across the observation period
+
+Federated Learning Subsets:
+Device-level partitions for federated learning were derived directly from the same sampled subset, ensuring consistency between centralized and federated experimental settings.
+
+Subset Statistics:
+
+Centralized ML Subset:
+- Pi-4: 254,044 rows (1,120 anomalies, 0.4409%)
+- Pi-5: 232,228 rows (2,180 anomalies, 0.9387%)
+- Pi-6: 253,549 rows (1,139 anomalies, 0.4492%)
+- Pi-7: 260,179 rows (1,649 anomalies, 0.6338%)
+
+Federated Learning Clients (Derived from the same subset):
+- Pi-4: 254,044 rows (1,120 anomalies, 0.4409%)
+- Pi-5: 232,228 rows (2,180 anomalies, 0.9387%)
+- Pi-6: 253,549 rows (1,139 anomalies, 0.4492%)
+- Pi-7: 260,179 rows (1,649 anomalies, 0.6338%)
+
+Notes:
+- The federated client partitions are consistent with the centralized subset, enabling fair comparison between centralized and federated learning approaches.
+- These subsets are provided for experimental reproducibility only. The full dataset is available in the main data directory.

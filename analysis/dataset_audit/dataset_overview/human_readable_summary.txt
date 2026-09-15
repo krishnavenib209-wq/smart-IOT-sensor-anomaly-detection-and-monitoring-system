@@ -1,0 +1,18 @@
+PAPER A DATASET AUDIT SUMMARY
+============================================================
+
+rows: 7099770
+columns: 17
+valid_timestamps: 5490528
+invalid_timestamps: 1609242
+start_timestamp: 2025-12-09 11:53:20.280267
+end_timestamp: 2026-02-04 12:00:08.029185
+num_devices: 4
+total_anomalies_normalized: 50887
+global_anomaly_rate_percent: 0.7167
+
+Per-device summary:
+  pi4: records=1,810,157, anomalies=8,064, rate=0.4455%
+  pi5: records=1,664,754, anomalies=15,274, rate=0.9175%
+  pi6: records=1,776,276, anomalies=7,977, rate=0.4491%
+  pi7: records=1,848,583, anomalies=19,572, rate=1.0588%

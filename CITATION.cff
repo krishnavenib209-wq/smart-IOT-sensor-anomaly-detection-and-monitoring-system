@@ -1,0 +1,19 @@
+```yaml
+cff-version: 1.2.0
+message: "If you use this dataset, please cite the associated publication (to be updated after acceptance), or cite the dataset using the DOI below."
+title: "Smart-Home IoT Dataset for Federated Anomaly Detection"
+version: "1.0"
+doi: "10.5281/zenodo.19780148"
+date-released: 2026-04-25
+
+authors:
+  - family-names: Jarjis
+    given-names: Alend
+    email: alend.jarjis@su.edu.krd
+    affiliation: "Faculty of Engineering, Department of Computer Engineering, Kocaeli University, Turkey; Department of Mathematics, Salahaddin University, Erbil, Iraq"
+
+  - family-names: Becerikli
+    given-names: Yaşar
+    affiliation: "Faculty of Engineering, Department of Computer Engineering, Kocaeli University, Turkey"
+
+license: "CC-BY-4.0"

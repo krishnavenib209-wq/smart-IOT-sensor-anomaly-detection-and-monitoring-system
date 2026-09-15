@@ -1,0 +1,4 @@
+Dataset frozen on: 2026-02-04
+Last anomaly injection session completed.
+No further data collection performed after this date.
+

@@ -1,0 +1,10 @@
+metric,value
+rows,7099770
+columns,17
+valid_timestamps,5490528
+invalid_timestamps,1609242
+start_timestamp,2025-12-09 11:53:20.280267
+end_timestamp,2026-02-04 12:00:08.029185
+num_devices,4
+total_anomalies_normalized,50887
+global_anomaly_rate_percent,0.7167

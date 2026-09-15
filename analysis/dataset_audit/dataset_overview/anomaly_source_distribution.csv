@@ -1,0 +1,8 @@
+anomaly_source,count,percentage
+injected,30211,59.3688
+none,8586,16.8727
+fault,6709,13.1841
+retro,5106,10.034
+pi7,214,0.4205
+0,45,0.0884
+mixed,16,0.0314

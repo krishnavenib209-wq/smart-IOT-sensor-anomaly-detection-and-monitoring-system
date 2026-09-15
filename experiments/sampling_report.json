@@ -1,0 +1,16 @@
+{
+  "input_dataset": "C:\\IoT-Collector\\analysis\\setD_D2\\datasets\\merged_dataset_ml_ready.csv",
+  "input_rows": 7005585,
+  "ml_total_rows_target": 1000000,
+  "ml_total_rows_actual": 1000000,
+  "time_bins": 3,
+  "devices": [
+    "pi4",
+    "pi5",
+    "pi6",
+    "pi7"
+  ],
+  "ml_subset_summary_file": "C:\\IoT-Collector\\analysis\\final_sampling\\ml_smart_subset_summary.csv",
+  "fl_clients_summary_file": "C:\\IoT-Collector\\analysis\\final_sampling\\fl_clients_realistic_summary.csv",
+  "fl_client_folder": "C:\\IoT-Collector\\analysis\\final_sampling\\fl_clients_realistic"
+}

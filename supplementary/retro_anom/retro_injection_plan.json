@@ -1,0 +1,21 @@
+{
+  "dates": ["2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30"],
+  "windows": {
+    "pi4": [
+      {"start": "09:10:00", "dur_sec": 360, "type": "pir_false_motion"},
+      {"start": "16:20:00", "dur_sec": 360, "type": "pir_suppressed"}
+    ],
+    "pi6": [
+      {"start": "09:25:00", "dur_sec": 360, "type": "pir_false_motion"},
+      {"start": "17:00:00", "dur_sec": 360, "type": "pir_suppressed"}
+    ],
+    "pi5": [
+      {"start": "10:05:00", "dur_sec": 360, "type": "cpu_stress"},
+      {"start": "18:10:00", "dur_sec": 360, "type": "adxl_spike"}
+    ],
+    "pi7": [
+      {"start": "10:20:00", "dur_sec": 360, "type": "net_jitter"},
+      {"start": "19:00:00", "dur_sec": 360, "type": "mq_gas_spike"}
+    ]
+  }
+}

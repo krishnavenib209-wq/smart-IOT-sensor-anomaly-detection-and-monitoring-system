@@ -1,0 +1,2 @@
+timestamp,temperature_C,humidity,pir_motion,accel_x_m_s2,accel_y_m_s2,accel_z_m_s2,mq_raw,mq_gas_detected,anomaly_flag,anomaly_type,anomaly_source,pi_id,timestamp_original,timestamp_repair_note,timestamp_fixed
+2025-12-12T,19.1,68.5,0.0,,,,,,0.0,none,none,pi4,2025-12-12T,filled_midnight_for_date_only;,2025-12-12 00:00:00

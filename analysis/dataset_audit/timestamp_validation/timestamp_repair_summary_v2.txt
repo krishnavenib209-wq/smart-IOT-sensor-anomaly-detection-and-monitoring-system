@@ -1,0 +1,11 @@
+===== TIMESTAMP REPAIR SUMMARY =====
+Input file: C:\IoT-Collector\ML_READY\v2_realistic_full\merged_dataset.csv
+Original rows: 7099770
+Original columns: 13
+Default parse valid: 5490528
+ISO parse valid: 7062167
+Final valid after repairs: 7062168
+Final unrecoverable rows: 37602
+Repair log rows: 1
+Unrecoverable rows file: C:\IoT-Collector\analysis\setD_D2\timestamp_unrecoverable_rows_v2.csv
+Repaired dataset file: C:\IoT-Collector\analysis\setD_D2\merged_dataset_timestamp_repaired_v2.csv
