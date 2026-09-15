@@ -1,0 +1,48 @@
+# Python Bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter / IPython
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Large dataset files (exceeds GitHub 100MB limit)
+data/merged/*.csv
+data/clients_full/*.csv
+experiments/*.csv
+*.csv.gz
+*.zip
+*.tar.gz
+*.7z
+
+# Retain directory structure with .gitkeep if needed
+!data/merged/.gitkeep
+!data/clients_full/.gitkeep
+
+# Machine Learning models and checkpoints (if large)
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+
+# Logs & Temporary files
+*.log
+*.tmp
+*.temp
