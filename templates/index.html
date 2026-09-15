@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart IoT Sensor Anomaly Detection & Monitoring Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Bar -->
+        <header class="top-nav glass-panel">
+            <div class="brand-section">
+                <div class="brand-icon">
+                    <i data-lucide="activity"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>SmartHome IoT <span class="badge-fl">Federated FL</span></h1>
+                    <p class="subtitle">Real-time Multi-Node Sensor Anomaly Detection & Telemetry</p>
+                </div>
+            </div>
+
+            <div class="status-center">
+                <div class="status-pill live-pill">
+                    <span class="pulse-dot"></span>
+                    <span id="system-status-text">LIVE STREAMING</span>
+                </div>
+                <div class="header-stat">
+                    <span class="stat-label">Model Accuracy</span>
+                    <span class="stat-val text-cyan" id="model-acc-val">99.4%</span>
+                </div>
+                <div class="header-stat">
+                    <span class="stat-label">FL Active Nodes</span>
+                    <span class="stat-val text-violet">4 / 4 Nodes</span>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button id="btn-pause-stream" class="btn btn-secondary">
+                    <i data-lucide="pause"></i> Pause Stream
+                </button>
+                <button id="btn-inject-modal" class="btn btn-primary glow-cyan">
+                    <i data-lucide="zap"></i> Inject Test Fault
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="dashboard-grid">
+            <!-- Left Column: Edge Device Nodes (Pi-4 to Pi-7) -->
+            <section class="device-nodes-section">
+                <div class="section-header">
+                    <h2><i data-lucide="cpu"></i> Edge Nodes (Raspberry Pi)</h2>
+                    <span class="tag">Heterogeneous Cluster</span>
+                </div>
+
+                <div class="nodes-grid" id="nodes-container">
+                    <!-- Pi-4 Card -->
+                    <div class="node-card glass-panel active" id="node-card-pi4" onclick="selectDevice('pi4')">
+                        <div class="node-header">
+                            <div>
+                                <span class="node-id">Pi-4</span>
+                                <h3 class="node-name">Living Room Hub</h3>
+                            </div>
+                            <span class="node-badge badge-online">Online</span>
+                        </div>
+                        <div class="sensor-tags">
+                            <span class="sensor-pill"><i data-lucide="thermometer"></i> DHT22</span>
+                            <span class="sensor-pill"><i data-lucide="radar"></i> PIR Motion</span>
+                        </div>
+                        <div class="node-metrics">
+                            <div class="metric-mini">
+                                <span class="lbl">Temp</span>
+                                <span class="val" id="val-pi4-temp">-- °C</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">Humidity</span>
+                                <span class="val" id="val-pi4-humidity">-- %</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">Motion</span>
+                                <span class="val" id="val-pi4-pir">--</span>
+                            </div>
+                        </div>
+                        <div class="node-footer">
+                            <span class="risk-label">Anomaly Risk:</span>
+                            <span class="risk-badge risk-low" id="risk-pi4">0.02 (Normal)</span>
+                        </div>
+                    </div>
+
+                    <!-- Pi-5 Card -->
+                    <div class="node-card glass-panel" id="node-card-pi5" onclick="selectDevice('pi5')">
+                        <div class="node-header">
+                            <div>
+                                <span class="node-id">Pi-5</span>
+                                <h3 class="node-name">Vibration & Structural</h3>
+                            </div>
+                            <span class="node-badge badge-online">Online</span>
+                        </div>
+                        <div class="sensor-tags">
+                            <span class="sensor-pill"><i data-lucide="thermometer"></i> DHT22</span>
+                            <span class="sensor-pill"><i data-lucide="activity"></i> ADXL345</span>
+                        </div>
+                        <div class="node-metrics">
+                            <div class="metric-mini">
+                                <span class="lbl">Temp</span>
+                                <span class="val" id="val-pi5-temp">-- °C</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">Accel Z</span>
+                                <span class="val" id="val-pi5-accel">-- m/s²</span>
+                            </div>
+                        </div>
+                        <div class="node-footer">
+                            <span class="risk-label">Anomaly Risk:</span>
+                            <span class="risk-badge risk-low" id="risk-pi5">0.03 (Normal)</span>
+                        </div>
+                    </div>
+
+                    <!-- Pi-6 Card -->
+                    <div class="node-card glass-panel" id="node-card-pi6" onclick="selectDevice('pi6')">
+                        <div class="node-header">
+                            <div>
+                                <span class="node-id">Pi-6</span>
+                                <h3 class="node-name">Hallway Entry Node</h3>
+                            </div>
+                            <span class="node-badge badge-online">Online</span>
+                        </div>
+                        <div class="sensor-tags">
+                            <span class="sensor-pill"><i data-lucide="thermometer"></i> DHT22</span>
+                            <span class="sensor-pill"><i data-lucide="radar"></i> PIR Motion</span>
+                        </div>
+                        <div class="node-metrics">
+                            <div class="metric-mini">
+                                <span class="lbl">Temp</span>
+                                <span class="val" id="val-pi6-temp">-- °C</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">Humidity</span>
+                                <span class="val" id="val-pi6-humidity">-- %</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">Motion</span>
+                                <span class="val" id="val-pi6-pir">--</span>
+                            </div>
+                        </div>
+                        <div class="node-footer">
+                            <span class="risk-label">Anomaly Risk:</span>
+                            <span class="risk-badge risk-low" id="risk-pi6">0.01 (Normal)</span>
+                        </div>
+                    </div>
+
+                    <!-- Pi-7 Card -->
+                    <div class="node-card glass-panel" id="node-card-pi7" onclick="selectDevice('pi7')">
+                        <div class="node-header">
+                            <div>
+                                <span class="node-id">Pi-7</span>
+                                <h3 class="node-name">Kitchen Safety & Gas</h3>
+                            </div>
+                            <span class="node-badge badge-online">Online</span>
+                        </div>
+                        <div class="sensor-tags">
+                            <span class="sensor-pill"><i data-lucide="thermometer"></i> DHT22</span>
+                            <span class="sensor-pill"><i data-lucide="flame"></i> MQ Gas</span>
+                        </div>
+                        <div class="node-metrics">
+                            <div class="metric-mini">
+                                <span class="lbl">Temp</span>
+                                <span class="val" id="val-pi7-temp">-- °C</span>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="lbl">MQ Gas Raw</span>
+                                <span class="val" id="val-pi7-mq">--</span>
+                            </div>
+                        </div>
+                        <div class="node-footer">
+                            <span class="risk-label">Anomaly Risk:</span>
+                            <span class="risk-badge risk-low" id="risk-pi7">0.04 (Normal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Federated Learning Aggregation Card -->
+                <div class="fl-status-card glass-panel">
+                    <div class="fl-header">
+                        <div class="fl-icon"><i data-lucide="git-merge"></i></div>
+                        <div>
+                            <h4>FL Aggregation Status</h4>
+                            <p>FedAvg Engine (Cross-Device Global Model)</p>
+                        </div>
+                    </div>
+                    <div class="fl-progress-bar">
+                        <div class="fl-progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="fl-meta">
+                        <span>Round: <strong>10 / 10 Complete</strong></span>
+                        <span>Convergence: <strong>99.4%</strong></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Middle Column: Live Telemetry & Anomaly Waveform Charts -->
+            <section class="telemetry-chart-section glass-panel">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <h2><i data-lucide="line-chart"></i> Real-Time Telemetry Stream</h2>
+                        <span id="active-device-indicator" class="active-tag">Viewing: Pi-4 (Living Room Hub)</span>
+                    </div>
+                    <div class="chart-controls">
+                        <button class="btn-chip active" onclick="setChartMetric('temp')">Temperature</button>
+                        <button class="btn-chip" onclick="setChartMetric('humidity')">Humidity</button>
+                        <button class="btn-chip" onclick="setChartMetric('anomaly')">Anomaly Score</button>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="liveTelemetryChart"></canvas>
+                </div>
+
+                <!-- Key Telemetry Gauge Strip -->
+                <div class="telemetry-gauges">
+                    <div class="gauge-card">
+                        <div class="gauge-icon"><i data-lucide="thermometer"></i></div>
+                        <div>
+                            <span class="g-lbl">Active Temperature</span>
+                            <h3 class="g-val" id="selected-gauge-temp">24.2 °C</h3>
+                        </div>
+                    </div>
+
+                    <div class="gauge-card">
+                        <div class="gauge-icon"><i data-lucide="droplets"></i></div>
+                        <div>
+                            <span class="g-lbl">Relative Humidity</span>
+                            <h3 class="g-val" id="selected-gauge-humidity">53.1 %</h3>
+                        </div>
+                    </div>
+
+                    <div class="gauge-card">
+                        <div class="gauge-icon"><i data-lucide="shield-alert"></i></div>
+                        <div>
+                            <span class="g-lbl">Anomaly Likelihood</span>
+                            <h3 class="g-val text-cyan" id="selected-gauge-score">0.03 (Normal)</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Real-time Anomaly Alerts & Attack Injection Panel -->
+            <section class="alerts-sidebar glass-panel">
+                <div class="sidebar-header">
+                    <h2><i data-lucide="bell-ring"></i> Anomaly Alert Stream</h2>
+                    <span class="alert-count-pill" id="alert-counter">0 Detected</span>
+                </div>
+
+                <div class="alerts-feed" id="alerts-container">
+                    <div class="empty-alerts">
+                        <i data-lucide="shield-check"></i>
+                        <p>No active anomalies detected across edge nodes.</p>
+                        <span>Systems operating under standard parameters.</span>
+                    </div>
+                </div>
+
+                <!-- Anomaly Injection Quick Box -->
+                <div class="injection-quickbox">
+                    <h4><i data-lucide="terminal"></i> Fault Simulation</h4>
+                    <p>Trigger synthetic edge fault conditions:</p>
+                    <div class="quick-buttons">
+                        <button class="btn-fault" onclick="triggerFault('temp_spike')">🔥 Heat Spike</button>
+                        <button class="btn-fault" onclick="triggerFault('gas_leak')">☣️ Gas Leak</button>
+                        <button class="btn-fault" onclick="triggerFault('vibration')">〰️ Vibration</button>
+                        <button class="btn-fault" onclick="triggerFault('sensor_freeze')">❌ Disconnect</button>
+                    </div>
+                    <button class="btn-clear-fault" onclick="clearFault()">Restore Baseline</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Anomaly Injection Modal -->
+    <div class="modal-overlay" id="fault-modal">
+        <div class="modal-box glass-panel">
+            <div class="modal-header">
+                <h3><i data-lucide="shield-alert"></i> Inject Simulated Sensor Anomaly</h3>
+                <button class="btn-close" onclick="closeModal()"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Select the target Raspberry Pi node and anomaly scenario to evaluate real-time FL detector response:</p>
+                <div class="form-group">
+                    <label>Target Edge Node</label>
+                    <select id="modal-target-node">
+                        <option value="pi4">Pi-4 (Living Room Hub - DHT22 / PIR)</option>
+                        <option value="pi5">Pi-5 (Structural & Vibration - DHT22 / ADXL345)</option>
+                        <option value="pi6">Pi-6 (Hallway Entry Node - DHT22 / PIR)</option>
+                        <option value="pi7">Pi-7 (Kitchen Safety Node - DHT22 / MQ Gas)</option>
+                        <option value="all">All Federated Nodes (Cluster-wide)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Anomaly Scenario</label>
+                    <select id="modal-fault-type">
+                        <option value="temp_spike">Sudden Thermal Overheating (+25°C to +40°C)</option>
+                        <option value="gas_leak">Combustible Gas Concentration Spike (MQ Sensor)</option>
+                        <option value="vibration">High Amplitude Structural Vibration (ADXL345)</option>
+                        <option value="sensor_freeze">Sensor Disconnection / Hardware Failure (-999)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary glow-cyan" onclick="submitModalFault()">Inject Scenario</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App JavaScript -->
+    <script src="/static/js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
